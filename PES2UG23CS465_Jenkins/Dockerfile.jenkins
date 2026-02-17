@@ -3,4 +3,8 @@ FROM jenkins/jenkins:lts
 USER root
 RUN apt-get update && apt-get install -y     docker.io     make     g++     curl
 
+RUN groupdel docker || true && \
+    groupadd -g 984 docker && \
+    usermod -aG docker jenkins
+
 USER jenkins
